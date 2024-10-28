@@ -1,0 +1,26 @@
+stages:
+  - build
+  - test
+  - package
+
+variables:
+  GRADLE_OPTS: "-Dorg.gradle.daemon=false"
+
+build:
+  stage: build
+  script:
+    - ./gradlew clean build
+
+test:
+  stage: test
+  script:
+    - ./gradlew test
+
+package:
+  stage: package
+  script:
+    - ./gradlew assemble
+  artifacts:
+    paths:
+      - build/libs/*.jar
+
